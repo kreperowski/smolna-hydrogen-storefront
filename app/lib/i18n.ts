@@ -8,10 +8,14 @@ export function getLocaleFromRequest(request: Request): I18nLocale {
   const url = new URL(request.url);
   const firstPathPart = url.pathname.split('/')[1]?.toUpperCase() ?? '';
 
+  const acceptLang = request.headers.get('accept-language');
+
   type I18nFromUrl = [I18nLocale['language'], I18nLocale['country']];
 
   let pathPrefix = '';
-  let [language, country]: I18nFromUrl = ['EN', 'US'];
+  let [language, country]: I18nFromUrl = acceptLang?.includes('en')
+    ? ['EN', 'PL']
+    : ['PL', 'PL'];
 
   if (/^[A-Z]{2}-[A-Z]{2}$/i.test(firstPathPart)) {
     pathPrefix = '/' + firstPathPart;

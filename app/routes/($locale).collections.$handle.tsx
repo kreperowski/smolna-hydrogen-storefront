@@ -1,6 +1,6 @@
-import {redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
-import {useLoaderData, type MetaFunction} from 'react-router';
-import {getPaginationVariables, Analytics} from '@shopify/hydrogen';
+import {type LoaderFunctionArgs, redirect} from '@shopify/remix-oxygen';
+import {type MetaFunction, useLoaderData} from 'react-router';
+import {Analytics, getPaginationVariables} from '@shopify/hydrogen';
 import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
 import {redirectIfHandleIsLocalized} from '~/lib/redirect';
 import {ProductItem} from '~/components/ProductItem';

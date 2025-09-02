@@ -1,11 +1,11 @@
-import {redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
-import {useLoaderData, type MetaFunction} from 'react-router';
+import {type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {type MetaFunction, useLoaderData} from 'react-router';
 import {
-  getSelectedProductOptions,
   Analytics,
-  useOptimisticVariant,
-  getProductOptions,
   getAdjacentAndFirstAvailableVariants,
+  getProductOptions,
+  getSelectedProductOptions,
+  useOptimisticVariant,
   useSelectedOptionInUrlParam,
 } from '@shopify/hydrogen';
 import {ProductPrice} from '~/components/ProductPrice';

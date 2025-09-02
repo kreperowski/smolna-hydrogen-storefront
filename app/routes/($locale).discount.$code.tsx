@@ -1,4 +1,6 @@
-import {redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+// TODO: remove?
+
+import {type LoaderFunctionArgs, redirect} from '@shopify/remix-oxygen';
 
 /**
  * Automatically applies a discount found on the url

@@ -4,22 +4,22 @@ import type {
   CustomerFragment,
 } from 'customer-accountapi.generated';
 import {
-  data,
   type ActionFunctionArgs,
+  data,
   type LoaderFunctionArgs,
 } from '@shopify/remix-oxygen';
 import {
+  type Fetcher,
   Form,
+  type MetaFunction,
   useActionData,
   useNavigation,
   useOutletContext,
-  type MetaFunction,
-  type Fetcher,
 } from 'react-router';
 import {
-  UPDATE_ADDRESS_MUTATION,
-  DELETE_ADDRESS_MUTATION,
   CREATE_ADDRESS_MUTATION,
+  DELETE_ADDRESS_MUTATION,
+  UPDATE_ADDRESS_MUTATION,
 } from '~/graphql/customer-account/CustomerAddressMutations';
 
 export type ActionResponse = {

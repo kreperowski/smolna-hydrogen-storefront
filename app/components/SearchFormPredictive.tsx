@@ -1,10 +1,10 @@
 import {
+  type Fetcher,
+  type FormProps,
   useFetcher,
   useNavigate,
-  type FormProps,
-  type Fetcher,
 } from 'react-router';
-import React, {useRef, useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import type {PredictiveSearchReturn} from '~/lib/search';
 import {useAside} from './Aside';
 

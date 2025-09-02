@@ -1,14 +1,14 @@
 import {Analytics, getShopAnalytics, useNonce} from '@shopify/hydrogen';
 import {type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {
-  Outlet,
-  useRouteError,
   isRouteErrorResponse,
-  type ShouldRevalidateFunction,
   Links,
   Meta,
+  Outlet,
   Scripts,
   ScrollRestoration,
+  type ShouldRevalidateFunction,
+  useRouteError,
   useRouteLoaderData,
 } from 'react-router';
 import favicon from '~/assets/favicon.svg';
@@ -86,7 +86,7 @@ export async function loader(args: LoaderFunctionArgs) {
     consent: {
       checkoutDomain: env.PUBLIC_CHECKOUT_DOMAIN,
       storefrontAccessToken: env.PUBLIC_STOREFRONT_API_TOKEN,
-      withPrivacyBanner: false,
+      withPrivacyBanner: true,
       // localize the privacy banner
       country: args.context.storefront.i18n.country,
       language: args.context.storefront.i18n.language,
@@ -146,8 +146,10 @@ export function Layout({children}: {children?: React.ReactNode}) {
   const nonce = useNonce();
   const data = useRouteLoaderData<RootLoader>('root');
 
+  const lang = data?.consent.language.toLowerCase() ?? 'pl';
+
   return (
-    <html lang="en">
+    <html lang={lang}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />

@@ -1,15 +1,15 @@
 import {
-  type LoaderFunctionArgs,
   type ActionFunctionArgs,
+  type LoaderFunctionArgs,
 } from '@shopify/remix-oxygen';
-import {useLoaderData, type MetaFunction} from 'react-router';
-import {getPaginationVariables, Analytics} from '@shopify/hydrogen';
+import {type MetaFunction, useLoaderData} from 'react-router';
+import {Analytics, getPaginationVariables} from '@shopify/hydrogen';
 import {SearchForm} from '~/components/SearchForm';
 import {SearchResults} from '~/components/SearchResults';
 import {
-  type RegularSearchReturn,
-  type PredictiveSearchReturn,
   getEmptyPredictiveSearchResult,
+  type PredictiveSearchReturn,
+  type RegularSearchReturn,
 } from '~/lib/search';
 
 export const meta: MetaFunction = () => {

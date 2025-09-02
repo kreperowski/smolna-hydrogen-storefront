@@ -2,16 +2,16 @@ import type {CustomerFragment} from 'customer-accountapi.generated';
 import type {CustomerUpdateInput} from '@shopify/hydrogen/customer-account-api-types';
 import {CUSTOMER_UPDATE_MUTATION} from '~/graphql/customer-account/CustomerUpdateMutation';
 import {
-  data,
   type ActionFunctionArgs,
+  data,
   type LoaderFunctionArgs,
 } from '@shopify/remix-oxygen';
 import {
   Form,
+  type MetaFunction,
   useActionData,
   useNavigation,
   useOutletContext,
-  type MetaFunction,
 } from 'react-router';
 
 export type ActionResponse = {

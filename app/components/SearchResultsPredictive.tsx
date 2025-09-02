@@ -1,10 +1,10 @@
-import {Link, useFetcher, type Fetcher} from 'react-router';
+import {type Fetcher, Link, useFetcher} from 'react-router';
 import {Image, Money} from '@shopify/hydrogen';
-import React, {useRef, useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {
   getEmptyPredictiveSearchResult,
-  urlWithTrackingParams,
   type PredictiveSearchReturn,
+  urlWithTrackingParams,
 } from '~/lib/search';
 import {useAside} from './Aside';
 

@@ -1,6 +1,6 @@
-import {redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
-import {useLoaderData, type MetaFunction} from 'react-router';
-import {Money, Image, flattenConnection} from '@shopify/hydrogen';
+import {type LoaderFunctionArgs, redirect} from '@shopify/remix-oxygen';
+import {type MetaFunction, useLoaderData} from 'react-router';
+import {flattenConnection, Image, Money} from '@shopify/hydrogen';
 import type {OrderLineItemFullFragment} from 'customer-accountapi.generated';
 import {CUSTOMER_ORDER_QUERY} from '~/graphql/customer-account/CustomerOrderQuery';
 

@@ -5,6 +5,7 @@ export async function loader({
   request,
   context: {storefront},
 }: LoaderFunctionArgs) {
+  // TODO: add sitemap URLs
   const response = await getSitemapIndex({
     storefront,
     request,

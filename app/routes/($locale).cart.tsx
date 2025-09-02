@@ -2,10 +2,10 @@ import {type MetaFunction, useLoaderData} from 'react-router';
 import type {CartQueryDataReturn} from '@shopify/hydrogen';
 import {CartForm} from '@shopify/hydrogen';
 import {
-  data,
-  type LoaderFunctionArgs,
   type ActionFunctionArgs,
+  data,
   type HeadersFunction,
+  type LoaderFunctionArgs,
 } from '@shopify/remix-oxygen';
 import {CartMain} from '~/components/CartMain';
 
