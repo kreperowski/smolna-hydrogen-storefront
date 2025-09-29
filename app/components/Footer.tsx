@@ -1,16 +1,16 @@
 import {Suspense} from 'react';
 import {Await, NavLink} from 'react-router';
-import type {FooterQuery, HeaderQuery} from 'storefrontapi.generated';
+import type {FooterQuery} from 'storefrontapi.generated';
 
 interface FooterProps {
   footer: Promise<FooterQuery | null>;
-  header: HeaderQuery;
+  subFooter: Promise<SubFooterQuery | null>;
   publicStoreDomain: string;
 }
 
 export function Footer({
   footer: footerPromise,
-  header,
+  subFooter: subFooterPromise,
   publicStoreDomain,
 }: FooterProps) {
   return (
@@ -18,10 +18,10 @@ export function Footer({
       <Await resolve={footerPromise}>
         {(footer) => (
           <footer className="footer">
-            {footer?.menu && header.shop.primaryDomain?.url && (
+            {footer?.menu && footer.shop.primaryDomain?.url && (
               <FooterMenu
                 menu={footer.menu}
-                primaryDomainUrl={header.shop.primaryDomain.url}
+                primaryDomainUrl={footer.shop.primaryDomain.url}
                 publicStoreDomain={publicStoreDomain}
               />
             )}
@@ -38,7 +38,7 @@ function FooterMenu({
   publicStoreDomain,
 }: {
   menu: FooterQuery['menu'];
-  primaryDomainUrl: FooterProps['header']['shop']['primaryDomain']['url'];
+  primaryDomainUrl: FooterProps['footer']['shop']['primaryDomain']['url'];
   publicStoreDomain: string;
 }) {
   return (

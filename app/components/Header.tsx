@@ -5,11 +5,11 @@ import {
   useAnalytics,
   useOptimisticCart,
 } from '@shopify/hydrogen';
-import type {CartApiQueryFragment, HeaderQuery} from 'storefrontapi.generated';
+import type {CartApiQueryFragment} from 'storefrontapi.generated';
 import {useAside} from '~/components/Aside';
 
 interface HeaderProps {
-  header: HeaderQuery;
+  mainMenu: MainMenuQuery;
   cart: Promise<CartApiQueryFragment | null>;
   isLoggedIn: Promise<boolean>;
   publicStoreDomain: string;
@@ -18,24 +18,26 @@ interface HeaderProps {
 type Viewport = 'desktop' | 'mobile';
 
 export function Header({
-  header,
+  mainMenu,
   isLoggedIn,
   cart,
   publicStoreDomain,
 }: HeaderProps) {
-  const {shop, menu} = header;
+  const {menu} = mainMenu;
+
   return (
     <header className="header">
-      <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
-        <strong>{shop.name}</strong>
-      </NavLink>
-      <HeaderMenu
-        menu={menu}
-        viewport="desktop"
-        primaryDomainUrl={header.shop.primaryDomain.url}
-        publicStoreDomain={publicStoreDomain}
-      />
-      <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+      HEADER
+      {/*<NavLink prefetch="intent" to="/" style={activeLinkStyle} end>*/}
+      {/*  <strong>{shop.name}</strong>*/}
+      {/*</NavLink>*/}
+      {/*<HeaderMenu*/}
+      {/*  menu={menu}*/}
+      {/*  viewport="desktop"*/}
+      {/*  primaryDomainUrl={header.shop.primaryDomain.url}*/}
+      {/*  publicStoreDomain={publicStoreDomain}*/}
+      {/*/>*/}
+      {/*<HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />*/}
     </header>
   );
 }
@@ -46,8 +48,8 @@ export function HeaderMenu({
   viewport,
   publicStoreDomain,
 }: {
-  menu: HeaderProps['header']['menu'];
-  primaryDomainUrl: HeaderProps['header']['shop']['primaryDomain']['url'];
+  menu: HeaderProps['mainMenu']['menu'];
+  primaryDomainUrl: HeaderProps['mainMenu']['shop']['primaryDomain']['url'];
   viewport: Viewport;
   publicStoreDomain: HeaderProps['publicStoreDomain'];
 }) {
@@ -70,13 +72,13 @@ export function HeaderMenu({
       {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
         if (!item.url) return null;
 
-        // if the url is internal, we strip the domain
         const url =
           item.url.includes('myshopify.com') ||
           item.url.includes(publicStoreDomain) ||
           item.url.includes(primaryDomainUrl)
             ? new URL(item.url).pathname
             : item.url;
+
         return (
           <NavLink
             className="header-menu-item"
