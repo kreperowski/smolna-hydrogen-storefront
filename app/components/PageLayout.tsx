@@ -45,8 +45,12 @@ export function PageLayout({
           publicStoreDomain={publicStoreDomain}
         />
       )}
-      <main>
-        {sideMenu && <SideMenu sideMenu={sideMenu} />}
+      {sideMenu && (
+        <SideMenu sideMenu={sideMenu} publicStoreDomain={publicStoreDomain} />
+      )}
+      <main
+        className={`mt-[60px] ${sideMenu && 'xl:ml-[320px]'} ${!sideMenu && '!md:border-x'} md:max-xl:!border-x min-h-[calc(100dvh-60px)] mx-5 md:border-r border-border`}
+      >
         {children}
       </main>
       <Footer

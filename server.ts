@@ -2,6 +2,7 @@
 import {storefrontRedirect} from '@shopify/hydrogen';
 import {createRequestHandler} from '@shopify/remix-oxygen';
 import {createAppLoadContext} from '~/lib/context';
+import {useMatches} from 'react-router';
 
 /**
  * Export a fetch handler in module format.
@@ -59,3 +60,12 @@ export default {
     }
   },
 };
+
+export function usePrefixPathWithLocale(path: string) {
+  const [root] = useMatches();
+  const selectedLocale = (root.data as any)?.selectedLocale;
+
+  return selectedLocale
+    ? `${selectedLocale.pathPrefix}${path.startsWith('/') ? path : '/' + path}`
+    : path;
+}

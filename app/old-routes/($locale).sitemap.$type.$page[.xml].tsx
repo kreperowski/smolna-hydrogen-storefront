@@ -1,6 +1,5 @@
 import type {LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {getSitemap} from '@shopify/hydrogen';
-import {SUPPORTED_LOCALES} from '~/lib/i18n';
 
 export async function loader({
   request,
@@ -11,9 +10,7 @@ export async function loader({
     storefront,
     request,
     params,
-    locales: SUPPORTED_LOCALES.map(
-      (locale) => `${locale.language}-${locale.country}`,
-    ),
+    locales: ['PL-PL', 'EN-PL'],
     getLink: ({type, baseUrl, handle, locale}) => {
       if (!locale) return `${baseUrl}/${type}/${handle}`;
       return `${baseUrl}/${locale}/${type}/${handle}`;

@@ -4,3 +4,15 @@
  */
 
 @import 'tailwindcss';
+
+@theme {
+    /* breakpoints */
+    --breakpoint-xs: 420px;
+
+    /* fonts */
+    --font-geist: 'Geist Variable', sans-serif;
+
+    /* colors */
+    --color-border: oklch(0.3715 0 0);
+    --color-washed-red: oklch(0.6616 0.2249 25.88);
+}

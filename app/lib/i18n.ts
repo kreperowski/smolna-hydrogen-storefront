@@ -1,26 +1,70 @@
-import type {I18nBase} from '@shopify/hydrogen';
+import {
+  CountryCode,
+  LanguageCode,
+} from '@shopify/hydrogen/storefront-api-types';
+import {useMatches} from 'react-router';
 
-export interface I18nLocale extends I18nBase {
+export type Locale = {
+  language: LanguageCode;
+  country: CountryCode;
   pathPrefix: string;
+};
+
+export const DEFAULT_LOCALE: Locale = {
+  language: 'PL',
+  country: 'PL',
+  pathPrefix: '/',
+};
+
+export const SUPPORTED_LOCALES: Locale[] = [
+  DEFAULT_LOCALE,
+  {language: 'EN', country: 'PL', pathPrefix: '/en'},
+];
+
+const RE_LOCALE_PREFIX = /^[a-z]{2}$/i;
+
+function getFirstPathPart(url: URL): string | null {
+  return (
+    url.pathname
+      .split('/')
+      .at(1)
+      ?.replace(/\.data$/, '')
+      ?.toUpperCase() ?? null
+  );
 }
 
-export function getLocaleFromRequest(request: Request): I18nLocale {
-  const url = new URL(request.url);
-  const firstPathPart = url.pathname.split('/')[1]?.toUpperCase() ?? '';
-
-  const acceptLang = request.headers.get('accept-language');
-
-  type I18nFromUrl = [I18nLocale['language'], I18nLocale['country']];
+export function getLocaleFromRequest(request: Request): Locale {
+  const firstPathPart = getFirstPathPart(new URL(request.url));
 
   let pathPrefix = '';
-  let [language, country]: I18nFromUrl = acceptLang?.includes('en')
-    ? ['EN', 'PL']
-    : ['PL', 'PL'];
 
-  if (/^[A-Z]{2}-[A-Z]{2}$/i.test(firstPathPart)) {
-    pathPrefix = '/' + firstPathPart;
-    [language, country] = firstPathPart.split('-') as I18nFromUrl;
+  if (firstPathPart == null || !RE_LOCALE_PREFIX.test(firstPathPart)) {
+    return DEFAULT_LOCALE;
   }
 
-  return {language, country, pathPrefix};
+  pathPrefix = '/' + firstPathPart;
+
+  return {
+    language: pathPrefix.toLowerCase() === '/en' ? 'EN' : 'PL',
+    country: 'PL',
+    pathPrefix,
+  };
+}
+
+export interface WithLocale {
+  selectedLocale: Locale;
+}
+
+export function useSelectedLocale(): Locale | null {
+  const [root] = useMatches();
+  const {selectedLocale} = root.data as WithLocale;
+
+  return selectedLocale ?? null;
+}
+
+export function localeMatchesPrefix(localeSegment: string | null): boolean {
+  const prefix = '/' + (localeSegment ?? '');
+  return SUPPORTED_LOCALES.some((supportedLocale) => {
+    return supportedLocale.pathPrefix.toUpperCase() === prefix.toUpperCase();
+  });
 }

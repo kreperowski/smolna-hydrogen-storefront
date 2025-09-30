@@ -12,14 +12,21 @@ body {
   background: #1F1F1F;
 }
 
+@keyframes grain {
+  0% { transform: translate(0, 0) }
+  50% { transform: translate(-10%, 5%) }
+  100% { transform: translate(10%, -5%) }
+}
+
 body::before {
   content: "";
   position: fixed;
-  inset: 0;
+  inset: -50%;
   background: url("/noise.png") repeat;
   background-size: 1024px 1024px;
   opacity: 0.05;
   pointer-events: none;
+  animation: grain 300ms steps(3) infinite;
 }
 
 /*
@@ -170,15 +177,6 @@ button.reset:hover:not(:has(> *)) {
 * components/Header
 * --------------------------------------------------
 */
-.header {
-  align-items: center;
-  display: flex;
-  height: var(--header-height);
-  padding: 0 1rem;
-  position: sticky;
-  top: 0;
-  z-index: 1;
-}
 
 .header-menu-mobile-toggle {
   @media (min-width: 48em) {

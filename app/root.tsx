@@ -20,6 +20,7 @@ import {MAIN_MENU_QUERY} from '~/graphql/menu/MainMenuQuery';
 import {SIDE_MENU_QUERY} from '~/graphql/menu/SideMenuQuery';
 import {FOOTER_QUERY} from '~/graphql/menu/FooterQuery';
 import {SUB_FOOTER_QUERY} from '~/graphql/menu/SubFooterQuery';
+import '@fontsource-variable/geist';
 
 export type RootLoader = typeof loader;
 
@@ -81,6 +82,7 @@ export async function loader(args: LoaderFunctionArgs) {
   return {
     ...deferredData,
     ...criticalData,
+    selectedLocale: args.context.storefront.i18n,
     publicStoreDomain: env.PUBLIC_STORE_DOMAIN,
     shop: getShopAnalytics({
       storefront,
@@ -156,14 +158,19 @@ export function Layout({children}: {children?: React.ReactNode}) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="font-geist">
         {data ? (
           <Analytics.Provider
             cart={data.cart}
             shop={data.shop}
             consent={data.consent}
           >
-            <PageLayout {...data}>{children}</PageLayout>
+            <PageLayout
+              key={`${data.selectedLocale.language}-${data.selectedLocale.country}`}
+              {...data}
+            >
+              {children}
+            </PageLayout>
           </Analytics.Provider>
         ) : (
           children

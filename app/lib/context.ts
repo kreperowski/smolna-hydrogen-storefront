@@ -25,13 +25,15 @@ export async function createAppLoadContext(
     AppSession.init(request, [env.SESSION_SECRET]),
   ]);
 
+  const i18n = getLocaleFromRequest(request);
+
   const hydrogenContext = createHydrogenContext({
     env,
     request,
     cache,
     waitUntil,
     session,
-    i18n: getLocaleFromRequest(request),
+    i18n,
     cart: {
       queryFragment: CART_QUERY_FRAGMENT,
     },
